@@ -1,9 +1,20 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Controller {
+    public static ArrayList<Integer> randomNum() {
+        Random rd = new Random();
+        ArrayList<Integer> numberList =  new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            numberList.add(rd.nextInt(9) + 1);
+        }
+
+        return numberList;
+    }
     public static boolean inputCheck (String input) {
         String pattern = "^[1-9]*$";
         HashSet<Character> set = new HashSet<>();
