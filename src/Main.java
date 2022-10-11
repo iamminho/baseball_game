@@ -4,8 +4,11 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Integer> randomNumber = randomNum();
-
-
+        ArrayList<Integer> tmp = new ArrayList<>();
+        tmp.add(1);
+        tmp.add(2);
+        tmp.add(3);
+        baseballGame(tmp);
     }
 
     static ArrayList<Integer> randomNum() {
@@ -28,8 +31,6 @@ public class Main {
     static boolean inputCheck (String input) {
         String pattern = "^[1-9]*$";
         HashSet<Character> set = new HashSet<>();
-
-        //false 조건들
 
         // 글자 수가 3개가 아닐때
         if (input.length() != 3) return false;
@@ -57,23 +58,28 @@ public class Main {
 
 
     static void baseballGame (ArrayList<Integer> randomNumber) {
-        Scanner sc = new Scanner(System.in);
         boolean stopOrGo = false;
 
         while (!stopOrGo) {
             while (true) {
+                Scanner sc = new Scanner(System.in);
                 System.out.print("숫자를 입력해주세요 : ");
                 String input = sc.nextLine();
-                System.out.println("");
 
-                if (inputCheck(input)) {
+                if (!inputCheck(input)) {
                     System.out.println("형식에 맞지 않는 입력입니다. 다시입력해 주시기 바랍니다.");
                     continue;
                 }
 
                 ArrayList<Integer> inputList = inputNum(input);
+                int[] result = strikeNum(randomNumber, inputList);
 
-
+                if (printResult(result)) {
+                    System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+                    int number = sc.nextInt();
+                    if (number == 2) stopOrGo = true;
+                    break;
+                }
             }
         }
     }
@@ -102,6 +108,7 @@ public class Main {
         if (strike > 0 && strike < 3 && ball == 0) System.out.println(strike + "스트라이크");
         else if (strike == 0 && ball > 0) System.out.println(ball + "볼");
         else if (strike > 0 && strike < 3 && ball > 0) System.out.println(ball + "볼" + " " + strike + "스트라이크");
+        else if (strike == 0 && ball == 0) System.out.println("낫싱");
         else if (strike == 3) {
             System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
             return true;
