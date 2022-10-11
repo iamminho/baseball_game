@@ -78,7 +78,7 @@ public class Main {
         }
     }
 
-    static int[] StrikeNum(ArrayList<Integer> randomNumber, ArrayList<Integer> inputList) {
+    static int[] strikeNum(ArrayList<Integer> randomNumber, ArrayList<Integer> inputList) {
         int[] result;
         int strike = 0;
         int ball = 0;
@@ -95,5 +95,18 @@ public class Main {
         return result;
     }
 
+    static boolean printResult(int[] result) {
+        int strike = result[0];
+        int ball = result[1];
 
+        if (strike > 0 && strike < 3 && ball == 0) System.out.println(strike + "스트라이크");
+        else if (strike == 0 && ball > 0) System.out.println(ball + "볼");
+        else if (strike > 0 && strike < 3 && ball > 0) System.out.println(ball + "볼" + " " + strike + "스트라이크");
+        else if (strike == 3) {
+            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            return true;
+        }
+
+        return false;
+    }
 }
