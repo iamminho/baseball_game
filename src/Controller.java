@@ -10,7 +10,8 @@ public class Controller {
         ArrayList<Integer> numberList =  new ArrayList<>();
 
         for (int i = 0; i < 3; i++) {
-            numberList.add(rd.nextInt(9) + 1);
+            int number = rd.nextInt(9) + 1;
+            if (!numberList.contains(number)) numberList.add(number);
         }
 
         return numberList;
