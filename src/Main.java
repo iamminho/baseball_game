@@ -3,9 +3,9 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
         ArrayList<Integer> randomNumber = randomNum();
+
+
     }
 
     static ArrayList<Integer> randomNum() {
@@ -44,12 +44,8 @@ public class Main {
         return true;
     }
 
-    static ArrayList<Integer> inputNum() {
-        Scanner sc = new Scanner(System.in);
+    static ArrayList<Integer> inputNum(String input) {
         ArrayList<Integer> numbers = new ArrayList<>();
-
-        System.out.print("숫자를 입력해주세요 : ");
-        String input = sc.nextLine();
 
         for (int i = 0; i < input.length(); i++) {
             int tmp = input.charAt(i) - '0';
@@ -60,11 +56,44 @@ public class Main {
     }
 
 
-    //    static void baseballGame (ArrayList<Integer> randomNumber) {
-    //        boolean stopOrGo = false;
-    //
-    //        while (!stopOrGo) {
-    //
-    //        }
-    //    }
+    static void baseballGame (ArrayList<Integer> randomNumber) {
+        Scanner sc = new Scanner(System.in);
+        boolean stopOrGo = false;
+
+        while (!stopOrGo) {
+            while (true) {
+                System.out.print("숫자를 입력해주세요 : ");
+                String input = sc.nextLine();
+                System.out.println("");
+
+                if (inputCheck(input)) {
+                    System.out.println("형식에 맞지 않는 입력입니다. 다시입력해 주시기 바랍니다.");
+                    continue;
+                }
+
+                ArrayList<Integer> inputList = inputNum(input);
+
+
+            }
+        }
+    }
+
+    static int[] StrikeNum(ArrayList<Integer> randomNumber, ArrayList<Integer> inputList) {
+        int[] result;
+        int strike = 0;
+        int ball = 0;
+
+        for (int i = 0; i < randomNumber.size(); i++) {
+            for (int j = 0; j < inputList.size(); j++) {
+                if (i == j && randomNumber.get(i) == inputList.get(j)) strike++;
+                if (i != j && randomNumber.get(i) == inputList.get(j)) ball++;
+            }
+        }
+
+        result = new int[] {strike, ball};
+
+        return result;
+    }
+
+
 }
